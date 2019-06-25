@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>homepage</title>
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'materialize.min.css' %}">
+
+</head>
+<body>
+<nav>
+<div class="nav-wrapper teal accent-4">
+  <a href="#" class="brand-logo">Credit Management</a>
+  <ul id="nav-mobile" class="right hide-on-med-and-down">
+  </ul>
+</div>
+</nav>
+<h1>
+	view all users 
+</h1>
+<div>
+
+      <table class="highlight">
+        <thead>
+        	
+          <tr>
+              <th>Name</th>
+              <th>credits</th>
+           </tr>
+        </thead>
+
+        <tbody>
+        {% for u in obj %}
+        <tr>
+            <td>{{ u.name }}</td>
+            <td>{{ u.credits }}</td>
+            <form method="POST" id="creds" action="{% url 'transfer' %}">
+            	{% csrf_token %}
+            	<input type="hidden" name="credits" value={{ u.id }}>
+            	<td><input type="submit" value="transfer credits" name="abc" class="waves-effect waves-light btn-small"></td>
+
+            </form>
+       	</tr>
+       	{% endfor %}
+        </tbody>
+      </table>
+<h3>
+add a user
+</h3>
+<form method="POST" id="aa" action="{% url 'adduser' %}">
+{% csrf_token %}
+<h6>enter user's name</h6>
+ <input type="text" name="name">
+<h6>enter user's credits</h6>
+ <input type="text" name="credits">
+ <input type="submit" value="Submit" class="waves-effect waves-light btn-small">
+</form>
+</div>
+</body>
+</html>

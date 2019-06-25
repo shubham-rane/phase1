@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>transfer credits</title>
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'materialize.min.css' %}">
+
+</head>
+<body>
+<nav>
+<div class="nav-wrapper teal accent-4">
+  <a href="#" class="brand-logo">Credit Management</a>
+  <ul id="nav-mobile" class="right hide-on-med-and-down">
+  </ul>
+</div>
+</nav>
+<h1>
+	Transfer Credits
+</h1>
+<div>
+<h3>{{ user.name }} currently has {{ user.credits }} credits</h3>
+
+
+<form method="POST" id="aa" action="{% url 'update' %}">
+{% csrf_token %}
+  <h6>Amount of Credits to be transferred:</h6><br>
+  <input type="text" name="amt">
+  <br>
+  <h6>to:</h6><br>
+  <input type="text" name="reciever">
+  <br><br>
+  <input type="hidden" name="sender" value={{ user.id }}>
+  <input type="submit" value="Submit" class="waves-effect waves-light btn-small">
+</form> 
+
+</div>
+</body>
+</html>
